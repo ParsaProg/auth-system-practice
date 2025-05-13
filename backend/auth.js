@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const authMiddleware = require("./middleware");
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
 // حافظه لوکالی برای کاربران
 const users = [];
 const ADMIN_PASSWORD = "S3cR3tAdm1n!";
-router.get("/users", authMiddleware, (req, res) => {
+router.get("/users", (req, res) => {
   const adminPassword = req.headers["x-admin-password"];
 
   if (!adminPassword || adminPassword !== ADMIN_PASSWORD) {
